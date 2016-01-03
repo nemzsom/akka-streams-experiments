@@ -12,7 +12,7 @@ object FlexiRouterTest extends App {
   implicit val materializer = ActorMaterializer()
 
   val graph = FlowGraph.closed() { implicit b =>
-    val source = Source(List((2, 3), (4, 5)))
+    val source = Source(List((0, 1),(2, 3), (4, 5)))
 
     val sink1 = Sink.foreach[Int](x => println("1: " + x))
     val sink2 = Sink.foreach[String](x => println("2: " + x))
@@ -23,6 +23,8 @@ object FlexiRouterTest extends App {
     disJoin.out1.mapConcat(identity) ~> sink1
     disJoin.out2.mapConcat(identity) ~> sink2
   }
+
+  graph.run()
 }
 
 class DisJoinShape(_init: Init[(Int, Int)] = Name[(Int, Int)]("DisJoin")) extends FanOutShape[(Int, Int)](_init) {
