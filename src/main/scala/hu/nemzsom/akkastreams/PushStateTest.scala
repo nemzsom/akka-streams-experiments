@@ -7,7 +7,7 @@ import akka.stream.stage.{SyncDirective, Context, PushStage}
 
 object PushStateTest extends App {
 
-  implicit val system = ActorSystem("FlexiRouter-test")
+  implicit val system = ActorSystem("PushStateTest-test")
   implicit val materializer = ActorMaterializer()
   implicit val ec = system.dispatcher
 
